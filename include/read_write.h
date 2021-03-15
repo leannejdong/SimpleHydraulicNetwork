@@ -5,10 +5,10 @@
 #ifndef SIMPLEHYDRAULICNETWORK_READ_WRITE_H
 #define SIMPLEHYDRAULICNETWORK_READ_WRITE_H
 
-void write_csv(std::string filename, std::vector<std::pair<std::string, std::vector<int>>> dataset) {
+void write_csv(std::string filename, std::vector<std::pair<std::string, std::vector<double>>> dataset) {
     // Make a CSV file with one or more columns of integer values
     // Each column of data is represented by the pair <column name, column data>
-    //   as std::pair<std::string, std::vector<int>>
+    //   as std::pair<std::string, std::vector<type>>
     // The dataset is represented as a vector of these columns
     // Note that all columns should be the same size
 
@@ -36,12 +36,12 @@ void write_csv(std::string filename, std::vector<std::pair<std::string, std::vec
 
 }
 
-inline std::vector<std::pair<std::string, std::vector<int>>> read_csv(std::string filename){
+inline std::vector<std::pair<std::string, std::vector<double>>> read_csv(std::string filename){
     // Reads a CSV file into a vector of <string, vector<int>> pairs where
     // each pair represents <column name, column values>
 
     // Create a vector of <string, int vector> pairs to store the result
-    std::vector<std::pair<std::string, std::vector<int>>> result;
+    std::vector<std::pair<std::string, std::vector<double>>> result;
 
     // Create an input filestream
     std::ifstream myFile(filename);
@@ -51,7 +51,7 @@ inline std::vector<std::pair<std::string, std::vector<int>>> read_csv(std::strin
 
     // Helper vars
     std::string line, colname;
-    int val;
+    double val;
 
     // Read the column names
     if(myFile.good())
@@ -67,7 +67,7 @@ inline std::vector<std::pair<std::string, std::vector<int>>> read_csv(std::strin
         while(std::getline(ss, colname, ',')){
 
             // Initialize and add <colname, int vector> pairs to result
-            result.push_back({colname, std::vector<int> {}});
+            result.push_back({colname, std::vector<double> {}});
         }
     }
 
