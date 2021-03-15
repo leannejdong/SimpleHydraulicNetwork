@@ -4,8 +4,9 @@
 #include <utility> // std::pair
 #include <stdexcept> // std::runtime_error
 #include <sstream> // std::stringstream
+#include <iostream>
 #include "include/read_write.h"
-
+#include "include/ConvEigen.h"
 
 
 int main() {
@@ -21,6 +22,15 @@ int main() {
 
     // Write to another file to check that this was successful
     // write_csv("three_cols_copy.csv", three_cols);
+
+    // matrix to be loaded from a file
+    MatrixXd matrix_test2;
+
+    // load the matrix from the file
+    matrix_test2 = openData("matrix.csv");
+
+    // print the matrix in console
+     std::cout << matrix_test2;
 
     return 0;
 }
