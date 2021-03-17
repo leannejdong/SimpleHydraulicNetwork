@@ -31,7 +31,7 @@ void saveData(std::string fileName, MatrixXd  matrix)
 MatrixXd openData(std::string fileToOpen)
 {
 
-    // the inspiration for creating this function was drawn from here (I did NOT copy and paste the code)
+    // the inspiration for creating this function was drawn from here
     // https://stackoverflow.com/questions/34247057/how-to-read-csv-file-and-assign-to-eigen-matrix
 
     // the input is the file: "fileToOpen.csv":

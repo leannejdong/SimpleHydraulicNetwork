@@ -79,7 +79,5 @@ int main() {
 //        VectorXd x = A.colPivHouseholderQr().solve(b);
 //        cout << "The solution is:\n" << x << "\n";
 //    }
-
-
     return 0;
 }
