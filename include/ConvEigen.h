@@ -6,16 +6,22 @@
 #define SIMPLEHYDRAULICNETWORK_CONVEIGEN_H
 #include<Eigen/Dense>
 
-using namespace Eigen;
+using Eigen::MatrixXd;
+using Eigen::IOFormat;
+using Eigen::FullPrecision;
 using std::vector;
+using Eigen::Matrix;
+using Eigen::Map;
+using Eigen::Dynamic;
+using Eigen::RowMajor;
 
 void saveData(std::string fileName, MatrixXd  matrix)
 {
     //https://eigen.tuxfamily.org/dox/structEigen_1_1IOFormat.html
-    const static IOFormat CSVFormat(FullPrecision, DontAlignCols, ", ", "\n");
+    const static IOFormat CSVFormat(FullPrecision, Eigen::DontAlignCols, ", ", "\n");
 
     std::ofstream file(fileName);
-    if (file.is_open())
+    if (!file) return;
     {
         file << matrix.format(CSVFormat);
         // file.close();
