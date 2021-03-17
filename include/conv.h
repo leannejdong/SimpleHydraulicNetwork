@@ -5,7 +5,7 @@
 #ifndef SIMPLEHYDRAULICNETWORK_CONV_H
 #define SIMPLEHYDRAULICNETWORK_CONV_H
 
-using Eigen::VectorXd;
+//using Eigen::VectorXd;
 
 inline MatrixXd makeEigenMatrixFromVectors(const vector<vector<double>> &matvalues)
 {

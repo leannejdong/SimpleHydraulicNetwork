@@ -5,14 +5,14 @@
 #include <stdexcept> // std::runtime_error
 #include <sstream> // std::stringstream
 #include <iostream>
-#include "include/read_write.h"
+//#include "include/read_write.h"
 #include "include/ConvEigen.h"
-#include "include/conv.h"
-#include <cassert>
+//#include "include/conv.h"
 #include <Eigen/QR>
 
 using std::cout;
 using std::cerr;
+using Eigen::VectorXd;
 
 int main() {
 //    // Read three_cols.csv and ones.csv
@@ -57,8 +57,12 @@ int main() {
             0, 0, 0, 0, 0, 0, 1, 0,
             0, 0, 0, 0, 0, 0, 0, 1;
 
-    MatrixXd X = A.colPivHouseholderQr().solve(B.transpose());
+    //MatrixXd X = A.colPivHouseholderQr().solve(B.transpose());
+    MatrixXd X = A.lu().solve(B.transpose());
+    cerr << "The condition number is " << A.lu().rcond() << "\n";
     cerr << "The first set of solutions is \n" << X.col(0) << "\n";
+    double relative_err = (A*X - B.transpose()).norm()/B.transpose().norm();
+    cerr << "The relative error is:\n" << relative_err << "\n";
     saveData("outputs/flow.csv", X.transpose());
 //    Eigen::IOFormat csv(-1, 0, ", ", "\n");
 //    std::cout << X.format(csv) << std::endl;
@@ -81,3 +85,19 @@ int main() {
 //    }
     return 0;
 }
+
+/*
+ * Our accuracy are good but we are getting some systematic error as the solutions from Matlab and C++ deviate.
+ * This might due to the non-empty nullspace. If our matrix is rank deficient the solution may have an arbitrary large component added in the null space.
+ * In other words if Ax = b then the computed solution might be x' = x* + x0, where A*x0 = 0, so r = A*x'-b = 0.
+ * So, we could have perfect accuracy but still produce different solutions due to the non-empty nullspace.
+ * If my system is well-conditioned, I will not need to worry about that.  If it isn't, it might help explain the systematic error I'm getting.
+ *
+ */
+
+/*
+ * Precision could be lost when reading/writing CSV file
+ * Residual error (or existence of solutions)
+ * Rank deficiency
+ * Well conditionness
+ */
