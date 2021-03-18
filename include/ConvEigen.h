@@ -71,7 +71,7 @@ MatrixXd openData(std::string fileToOpen)
         matrixRowNumber++; //update the column numbers
     }
 
-    // here we convet the vector variable into the matrix and return the resulting object,
+    // here we convert the vector variable into the matrix and return the resulting object,
     // note that matrixEntries.data() is the pointer to the first memory location at which the entries of the vector matrixEntries are stored;
     return Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(matrixEntries.data(), matrixRowNumber, matrixEntries.size() / matrixRowNumber);
 

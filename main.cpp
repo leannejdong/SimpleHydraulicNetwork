@@ -47,26 +47,39 @@ int main() {
     MatrixXd B(8760, 8);
     B << Demand_z0, Demand_C, Demand_B, Demand_D, Demand_z4, Demand_A, Demand_E, Demand_F;
  //   cerr << B << "\n";
-    MatrixXd A(8, 8);
-    A << 1, -1, -1, -1, -1, 0, 0, 0,
-            0, 1, 0, 0, 0, 0, 0, 0,
-            0, 0, 1, 0, 0, 0, 0, 0,
-            0, 0, 0, 1, 0, 0, 0, 0,
-            0, 0, 0, 0, 1, -1, -1, 1,
-            0, 0, 0, 0, 0, 1, 0, 0,
-            0, 0, 0, 0, 0, 0, 1, 0,
-            0, 0, 0, 0, 0, 0, 0, 1;
+
+    MatrixXd Q = MatrixXd::Zero(8760, 8);
+    Q.col(1) = Demand_C;
+    Q.col(2) = Demand_B;
+    Q.col( 3) = Demand_D;
+    Q.col(4) = Demand_A + Demand_E + Demand_F;
+    Q.col(5) = Demand_A;
+    Q.col(6) = Demand_E;
+    Q.col(7) = Demand_F;
+    Q.col(0) = Demand_C + Demand_B + Demand_D + Demand_A + Demand_E + Demand_F;
+    cerr << "The first set of solutions is \n" << Q.row(0) << "\n";
+    saveData("outputs/flowQ.csv", Q);
+    cerr << Q.rows() << " rows and " << Q.cols() << " columns.";
+//    MatrixXd A(8, 8);
+//    A << 1, -1, -1, -1, -1, 0, 0, 0,
+//            0, 1, 0, 0, 0, 0, 0, 0,
+//            0, 0, 1, 0, 0, 0, 0, 0,
+//            0, 0, 0, 1, 0, 0, 0, 0,
+//            0, 0, 0, 0, 1, -1, -1, 1,
+//            0, 0, 0, 0, 0, 1, 0, 0,
+//            0, 0, 0, 0, 0, 0, 1, 0,
+//            0, 0, 0, 0, 0, 0, 0, 1;
 
     //MatrixXd X = A.colPivHouseholderQr().solve(B.transpose());
-    MatrixXd X = A.lu().solve(B.transpose());
-    cerr << "The condition number is " << A.lu().rcond() << "\n";
-    cerr << "The first set of solutions is \n" << X.col(0) << "\n";
-    double relative_err = (A*X - B.transpose()).norm()/B.transpose().norm();
-    cerr << "The relative error is:\n" << relative_err << "\n";
-    saveData("outputs/flow.csv", X.transpose());
-//    Eigen::IOFormat csv(-1, 0, ", ", "\n");
-//    std::cout << X.format(csv) << std::endl;
-    cerr << X.rows() << " rows and " << X.cols() << " columns.";
+//    MatrixXd X = A.lu().solve(B.transpose());
+//    cerr << "The condition number is " << A.lu().rcond() << "\n";
+//    cerr << "The first set of solutions is \n" << X.col(0) << "\n";
+//    double relative_err = (A*X - B.transpose()).norm()/B.transpose().norm();
+//    cerr << "The relative error is:\n" << relative_err << "\n";
+//    saveData("outputs/flow.csv", X.transpose());
+////    Eigen::IOFormat csv(-1, 0, ", ", "\n");
+////    std::cout << X.format(csv) << std::endl;
+//    cerr << X.rows() << " rows and " << X.cols() << " columns.";
 
 //    for (int i = 0; i < data.rows(); ++i){
 //        Demand_A(i) = Demand_A(i)/4.2/15;
