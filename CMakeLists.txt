@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 project(SimpleHydraulicNetwork)
-
 set(CMAKE_CXX_STANDARD 20)
 # check if Doxygen is installed
 find_package(Doxygen)
@@ -21,5 +20,11 @@ if (DOXYGEN_FOUND)
 else (DOXYGEN_FOUND)
     message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
+enable_testing()
+add_subdirectory(test)
+add_executable(Basic_tests test/test_main.cpp)
 add_executable(SimpleHydraulicNetwork main.cpp include/ConvEigen.h)
+add_test(Tester Basic_tests)
 target_link_libraries(SimpleHydraulicNetwork Eigen3::Eigen)
+#target_link_libraries(Basic_tests PRIVATE<SimpleHydraulicNetwork>)
+
