@@ -26,5 +26,4 @@ add_executable(Basic_tests test/test_main.cpp)
 add_executable(SimpleHydraulicNetwork main.cpp include/ConvEigen.h)
 add_test(Tester Basic_tests)
 target_link_libraries(SimpleHydraulicNetwork Eigen3::Eigen)
-#target_link_libraries(Basic_tests PRIVATE<SimpleHydraulicNetwork>)
 
