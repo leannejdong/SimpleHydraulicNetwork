@@ -26,6 +26,7 @@ void NetworkSolve() {
     MatrixXd data;
 
     // load the matrix from the file
+   // data = openData("/home/leanne/CLionProjects/SimpleHydraulicNetwork/inputs/matrix.csv");
     data = openData("inputs/matrix.csv");
     VectorXd Demand_A = data.col(0);
     VectorXd Demand_B = data.col(1);

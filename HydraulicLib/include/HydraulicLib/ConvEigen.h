@@ -50,6 +50,10 @@ MatrixXd openData(std::string fileToOpen)
 
     // in this object we store the data from the matrix
     std::ifstream matrixDataFile(fileToOpen);
+    if(!matrixDataFile) {
+        std::cerr << "Failed to open " << fileToOpen << "\n";
+        exit(EXIT_FAILURE);
+    }
 
     // this variable is used to store the row of the matrix that contains commas
     std::string matrixRowString;
