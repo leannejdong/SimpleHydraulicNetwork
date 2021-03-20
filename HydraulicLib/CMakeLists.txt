@@ -13,7 +13,7 @@ target_link_libraries(HydraulicLib PUBLIC    # PUBLIC so my 'users' also link to
 add_executable(basic_tests
         src/main.cpp
         src/read_write_test.cpp
-        )
+        src/NetworkSolve_test.cpp)
 target_include_directories(basic_tests PRIVATE include)
 
 add_test(NAME basic_tests COMMAND basic_tests WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
