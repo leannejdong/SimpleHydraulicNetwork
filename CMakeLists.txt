@@ -20,10 +20,33 @@ if (DOXYGEN_FOUND)
 else (DOXYGEN_FOUND)
     message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
+
+add_compile_options(-Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wcast-align)
+
+# this can only be applied to C++ sources
+set(CMAKE_CXX_FLAGS "-Wnon-virtual-dtor -Woverloaded-virtual")
+
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+    message("No build type specified, defaulting to Debug (no optimizations, include debug symbols), use -DCMAKE_BUILD_TYPE=RelWithDebInfo or =Release to build a release)")
+endif()
 enable_testing()
-add_subdirectory(test)
-add_executable(Basic_tests test/test_main.cpp)
-add_executable(SimpleHydraulicNetwork main.cpp include/ConvEigen.h)
-add_test(Tester Basic_tests)
-target_link_libraries(SimpleHydraulicNetwork Eigen3::Eigen)
+add_subdirectory(HydraulicLib)
+add_executable(SimpleHydraulicNetwork main.cpp)
+#target_link_libraries(SimpleHydraulicNetwork Eigen3::Eigen)
+target_link_libraries(SimpleHydraulicNetwork PRIVATE
+        HydraulicLib
+        )
+
+if (${CMAKE_SIZEOF_VOID_P} EQUAL 4)
+    set(TARGETBITS 32)
+else()
+    set(TARGETBITS 64)
+endif()
+
+message("")
+message("SimpleHydraulic configured to run on:  ${CMAKE_SYSTEM_NAME} ${TARGETBITS} bit, ${CMAKE_BUILD_TYPE} Mode")
+message("SimpleHydraulic will be built in:      ${CMAKE_BINARY_DIR}")
+#message("SimpleHydraulic will be installed in:  ${CMAKE_INSTALL_PREFIX}")  # not applicable here
+message("\n")
 
