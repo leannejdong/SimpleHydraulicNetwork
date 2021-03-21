@@ -16,21 +16,34 @@
 - CMake = 3.12
 - A Modern C++ compiler
 - Eigen3.3
+- doctest 
+  
+  [The fastest feature-rich C++11/14/17/20 single-header testing framework](https://raw.githubusercontent.com/onqtam/doctest/master/doctest/doctest.h)
 
 ### Linux
 
-#### Build and run from terminal
-(To avoid headache, set to absolute path whenever files need to be opened,
+#### Build from terminal
+(To avoid extra headache, set to absolute path whenever files need to be opened,
 such as `NetworkSolve.cpp` and `read_write_test.cpp`.)
 ```
-git clone https://github.com/leannejdong/autocircuit.git
-cd autocircuit/
+git clone git@github.com:leannejdong/SimpleHydraulicNetwork.git
+cd SimpleHydraulicNetwork/
 mkdir build
 cd build
 cmake ..
 make
+```
+To run the main program
+```
+cd ..
+build/SimpleHydraulicNetwork
+```
+To run the test suit
+```
 ctest
 ```
+
+
 
 #### Build from CLion (Best choice for windows user)
 
