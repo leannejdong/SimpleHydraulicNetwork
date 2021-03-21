@@ -20,7 +20,7 @@ void write_csv(std::string filename, std::vector<std::pair<std::string, std::vec
     std::ofstream myFile(filename);
 
     // Send column names to the stream
-    for(int j = 0; j < dataset.size(); ++j)
+    for(size_t j = 0; j < dataset.size(); ++j)
     {
         myFile << dataset.at(j).first;
         if(j != dataset.size() - 1) myFile << ","; // No comma at end of line
@@ -28,9 +28,9 @@ void write_csv(std::string filename, std::vector<std::pair<std::string, std::vec
     myFile << "\n";
 
     // Send data to the stream
-    for(int i = 0; i < dataset.at(0).second.size(); ++i)
+    for(size_t i = 0; i < dataset.at(0).second.size(); ++i)
     {
-        for(int j = 0; j < dataset.size(); ++j)
+        for(size_t j = 0; j < dataset.size(); ++j)
         {
             myFile << dataset.at(j).second.at(i);
             if(j != dataset.size() - 1) myFile << ","; // No comma at end of line
