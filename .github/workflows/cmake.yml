@@ -23,7 +23,5 @@ jobs:
       env:
         CC: ${{ matrix.compiler }}
       run: cmake -H. -Bbuild  -DBUILD_TESTS=ON -DCMAKEBUILD_TYPE=${{ matrix.BUILD_TYPE }}
-    - name: make
-      run: cmake --build build -- -j4
-    - name: test
-      run: cd build && ctest
+#    - name: make
+#      run: cmake --build build -- -j4
