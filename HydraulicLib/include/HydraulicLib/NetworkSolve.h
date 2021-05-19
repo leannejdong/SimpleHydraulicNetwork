@@ -4,6 +4,9 @@
 
 #ifndef SIMPLEHYDRAULICNETWORK_NetworkSolve_H
 #define SIMPLEHYDRAULICNETWORK_NetworkSolve_H
-void NetworkSolve();
+#include <Eigen/QR>
+using Eigen::MatrixXd;
+
+MatrixXd NetworkSolve();
 
 #endif //SIMPLEHYDRAULICNETWORK_NetworkSolve_H

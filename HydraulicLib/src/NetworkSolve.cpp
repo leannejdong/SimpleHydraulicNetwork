@@ -12,11 +12,12 @@
 #include <vector>
 //#include "include/read_write.h"
 //#include "include/conv.h"
+#include "HydraulicLib/NetworkSolve.h"
 using Eigen::VectorXd;
 using std::cerr;
 using std::cout;
 
-void NetworkSolve() {
+MatrixXd NetworkSolve() {
 //    // Read three_cols.csv and ones.csv
 //    std::vector<std::pair<std::string, std::vector<double>>> mul_cols = read_csv("Heating_Cooling_data.csv");
 //
@@ -60,9 +61,10 @@ void NetworkSolve() {
     Q.col(6) = Demand_E;
     Q.col(7) = Demand_F;
     Q.col(0) = Demand_C + Demand_B + Demand_D + Demand_A + Demand_E + Demand_F;
-    cerr << "The first set of solutions is \n" << Q.row(0) << "\n";
+ //   cerr << "The first set of solutions is \n" << Q.row(0) << "\n";
     saveData("outputs/flowQ.csv", Q);
-    cerr << Q.rows() << " rows and " << Q.cols() << " columns.";
+  //  cerr << Q.rows() << " rows and " << Q.cols() << " columns.";
+    return Q;
 //    MatrixXd A(8, 8);
 //    A << 1, -1, -1, -1, -1, 0, 0, 0,
 //            0, 1, 0, 0, 0, 0, 0, 0,
