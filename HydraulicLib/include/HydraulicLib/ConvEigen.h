@@ -16,7 +16,7 @@ using Eigen::Map;
 using Eigen::Dynamic;
 using Eigen::RowMajor;
 
-void saveData(std::string fileName, MatrixXd  matrix)
+inline void saveData(std::string fileName, MatrixXd  matrix)
 {
     //https://eigen.tuxfamily.org/dox/structEigen_1_1IOFormat.html
     const static IOFormat CSVFormat(FullPrecision, Eigen::DontAlignCols, ", ", "\n");
@@ -29,7 +29,7 @@ void saveData(std::string fileName, MatrixXd  matrix)
     }
 }
 
-MatrixXd openData(std::string fileToOpen)
+inline MatrixXd openData(std::string fileToOpen)
 {
 
     // the inspiration for creating this function was drawn from here
