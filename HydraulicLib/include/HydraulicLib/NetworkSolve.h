@@ -7,6 +7,7 @@
 #include <Eigen/QR>
 using Eigen::MatrixXd;
 
-MatrixXd NetworkSolve();
+MatrixXd calculateSoln();
+void NetworkSolve();
 
 #endif //SIMPLEHYDRAULICNETWORK_NetworkSolve_H

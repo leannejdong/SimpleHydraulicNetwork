@@ -17,17 +17,11 @@ using Eigen::VectorXd;
 using std::cerr;
 using std::cout;
 
-MatrixXd NetworkSolve() {
-//    // Read three_cols.csv and ones.csv
-//    std::vector<std::pair<std::string, std::vector<double>>> mul_cols = read_csv("Heating_Cooling_data.csv");
-//
-//    // Write to another file to check that this was successful
-//    write_csv("Heating_Cooling_data_copy.csv", mul_cols);
-    // matrix to be loaded from a file
+MatrixXd calculateSoln() {
     MatrixXd data;
 
     // load the matrix from the file
-   // data = openData("/home/leanne/CLionProjects/SimpleHydraulicNetwork/inputs/matrix.csv");
+    // data = openData("/home/leanne/CLionProjects/SimpleHydraulicNetwork/inputs/matrix.csv");
     data = openData("inputs/matrix.csv");
     VectorXd Demand_A = data.col(0);
     VectorXd Demand_B = data.col(1);
@@ -61,46 +55,11 @@ MatrixXd NetworkSolve() {
     Q.col(6) = Demand_E;
     Q.col(7) = Demand_F;
     Q.col(0) = Demand_C + Demand_B + Demand_D + Demand_A + Demand_E + Demand_F;
- //   cerr << "The first set of solutions is \n" << Q.row(0) << "\n";
-    saveData("outputs/flowQ.csv", Q);
-  //  cerr << Q.rows() << " rows and " << Q.cols() << " columns.";
     return Q;
-//    MatrixXd A(8, 8);
-//    A << 1, -1, -1, -1, -1, 0, 0, 0,
-//            0, 1, 0, 0, 0, 0, 0, 0,
-//            0, 0, 1, 0, 0, 0, 0, 0,
-//            0, 0, 0, 1, 0, 0, 0, 0,
-//            0, 0, 0, 0, 1, -1, -1, 1,
-//            0, 0, 0, 0, 0, 1, 0, 0,
-//            0, 0, 0, 0, 0, 0, 1, 0,
-//            0, 0, 0, 0, 0, 0, 0, 1;
-
-    //MatrixXd X = A.colPivHouseholderQr().solve(B.transpose());
-//    MatrixXd X = A.lu().solve(B.transpose());
-//    cerr << "The condition number is " << A.lu().rcond() << "\n";
-//    cerr << "The first set of solutions is \n" << X.col(0) << "\n";
-//    double relative_err = (A*X - B.transpose()).norm()/B.transpose().norm();
-//    cerr << "The relative error is:\n" << relative_err << "\n";
-//    saveData("outputs/flow.csv", X.transpose());
-////    Eigen::IOFormat csv(-1, 0, ", ", "\n");
-////    std::cout << X.format(csv) << std::endl;
-//    cerr << X.rows() << " rows and " << X.cols() << " columns.";
-
-//    for (int i = 0; i < data.rows(); ++i){
-//        Demand_A(i) = Demand_A(i)/4.2/15;
-//        Demand_B(i) = Demand_B(i)/4.2/15;
-//        Demand_C(i) = Demand_C(i)/4.2/15;
-//        Demand_D(i) = Demand_D(i)/4.2/15;
-//        Demand_E(i) = Demand_E(i)/4.2/15;
-//        Demand_F(i) = Demand_F(i)/4.2/15;
-//;    }
-    // MatrixXd Q = MatrixXd::Zero(8760, 8);
-
-//    for (int i = 0; i < data.rows(); ++i){
-//        b << 0.0, Demand_C(i), Demand_B(i), Demand_D(i), 0.0, Demand_A(i), Demand_E(i), Demand_F(i);
-//        VectorXd x = A.colPivHouseholderQr().solve(b);
-//        cout << "The solution is:\n" << x << "\n";
-//    }
+}
+void NetworkSolve() {
+    auto result = calculateSoln();
+    saveData("outputs/flowQ.csv", result);
 }
 
 /*
